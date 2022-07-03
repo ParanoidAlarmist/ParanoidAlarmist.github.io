@@ -20,25 +20,29 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.12.1","exturl":false,"sidebar":{"position":"right","display":"always","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="Chillax!">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Alarmist&#39;s Blog">
-<meta property="og:url" content="http://example.com/index.html">
+    <meta name="description" content="Notation:  变元分为标量、向量、矩阵三种 实值函数分为标量、向量、矩阵三种，分别用$f,\textbf{f}, \textbf{F}$   本质篇矩阵求导结果的布局 分子布局：分子列向量，分母行向量 \frac{\partial \pmb{f}_{2\times1}(\pmb{x})}{\partial \pmb{x}^T_{3\times1}}&#x3D;  \begin{bmatrix} \f">
+<meta property="og:type" content="article">
+<meta property="og:title" content="矩阵求导">
+<meta property="og:url" content="http://example.com/2022/07/03/2/index.html">
 <meta property="og:site_name" content="Alarmist&#39;s Blog">
-<meta property="og:description" content="Chillax!">
+<meta property="og:description" content="Notation:  变元分为标量、向量、矩阵三种 实值函数分为标量、向量、矩阵三种，分别用$f,\textbf{f}, \textbf{F}$   本质篇矩阵求导结果的布局 分子布局：分子列向量，分母行向量 \frac{\partial \pmb{f}_{2\times1}(\pmb{x})}{\partial \pmb{x}^T_{3\times1}}&#x3D;  \begin{bmatrix} \f">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-07-03T02:53:51.000Z">
+<meta property="article:modified_time" content="2022-07-03T07:58:38.858Z">
 <meta property="article:author" content="Alarmist">
+<meta property="article:tag" content="math">
+<meta property="article:tag" content="matrix">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="http://example.com/">
+<link rel="canonical" href="http://example.com/2022/07/03/2/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":true,"isPost":false,"lang":"en","comments":"","permalink":"","path":"index.html","title":""}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2022/07/03/2/","path":"2022/07/03/2/","title":"矩阵求导"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>Alarmist's Blog</title>
+<title>矩阵求导 | Alarmist's Blog</title>
   
 
 
@@ -70,7 +74,7 @@
 
     <a href="/" class="brand" rel="start">
       <i class="logo-line"></i>
-      <h1 class="site-title">Alarmist's Blog</h1>
+      <p class="site-title">Alarmist's Blog</p>
       <i class="logo-line"></i>
     </a>
       <p class="site-subtitle" itemprop="description">杞人忧天，伯虑愁眠啊</p>
@@ -130,7 +134,7 @@
 
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           Table of Contents
@@ -143,6 +147,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9C%AC%E8%B4%A8%E7%AF%87"><span class="nav-number">1.</span> <span class="nav-text">本质篇</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9F%A9%E9%98%B5%E6%B1%82%E5%AF%BC%E7%BB%93%E6%9E%9C%E7%9A%84%E5%B8%83%E5%B1%80"><span class="nav-number">1.1.</span> <span class="nav-text">矩阵求导结果的布局</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#text-D-pmb-x-f-%E4%B8%8E-nabla-pmb-x-f"><span class="nav-number">1.2.</span> <span class="nav-text">$\text{D}_{\pmb{x}}f$ 与 $\nabla_{\pmb{x}}f$</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9F%BA%E7%A1%80%E7%AF%87"><span class="nav-number">2.</span> <span class="nav-text">基础篇</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%91%E9%87%8F%E5%8F%98%E5%85%83%E7%9A%84%E5%AE%9E%E5%80%BC%E6%A0%87%E9%87%8F%E5%87%BD%E6%95%B0"><span class="nav-number">2.1.</span> <span class="nav-text">向量变元的实值标量函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9F%A9%E9%98%B5%E5%8F%98%E5%85%83%E7%9A%84%E5%AE%9E%E5%80%BC%E6%A0%87%E9%87%8F%E5%87%BD%E6%95%B0"><span class="nav-number">2.2.</span> <span class="nav-text">矩阵变元的实值标量函数</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%BF%9B%E9%98%B6%E7%AF%87"><span class="nav-number">3.</span> <span class="nav-text">进阶篇</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%B9%E7%9A%84%E4%B8%80%E4%BA%9B%E6%80%A7%E8%B4%A8"><span class="nav-number">3.1.</span> <span class="nav-text">迹的一些性质</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9F%A9%E9%98%B5%E5%BE%AE%E5%88%86%E7%9A%84%E4%B8%80%E4%BA%9B%E6%80%A7%E8%B4%A8"><span class="nav-number">3.2.</span> <span class="nav-text">矩阵微分的一些性质</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9F%A9%E9%98%B5%E6%B1%82%E5%AF%BC%E5%B8%B8%E7%94%A8%E6%8E%A8%E5%AF%BC%E5%BC%8F"><span class="nav-number">3.3.</span> <span class="nav-text">矩阵求导常用推导式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%B9%E5%B1%82%E9%A5%BC"><span class="nav-number">3.3.1.</span> <span class="nav-text">夹层饼</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A1%8C%E5%88%97%E5%BC%8F"><span class="nav-number">3.3.2.</span> <span class="nav-text">行列式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%86%E7%9F%A9%E9%98%B5"><span class="nav-number">3.3.3.</span> <span class="nav-text">逆矩阵</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%B9%E5%92%8C%E5%BE%AE%E5%88%86%E5%8F%B7%E7%9A%84%E4%BA%A4%E6%8D%A2"><span class="nav-number">3.3.4.</span> <span class="nav-text">迹和微分号的交换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BE%8B%E5%AD%90%EF%BC%88%E7%9C%8B%E5%AE%8C%E5%B0%B1%E6%87%82"><span class="nav-number">3.3.5.</span> <span class="nav-text">例子（看完就懂</span></a></li></ol></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -204,16 +209,17 @@
 </noscript>
 
 
-    <div class="main-inner index posts-expand">
+    <div class="main-inner post posts-expand">
 
-    
+
+  
 
 
 <div class="post-block">
   
   
 
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
     <link itemprop="mainEntityOfPage" href="http://example.com/2022/07/03/2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -227,13 +233,13 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Alarmist's Blog">
+      <meta itemprop="name" content="矩阵求导 | Alarmist's Blog">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/07/03/2/" class="post-title-link" itemprop="url">矩阵求导</a>
-        </h2>
+        <h1 class="post-title" itemprop="name headline">
+          矩阵求导
+        </h1>
 
         <div class="post-meta-container">
           <div class="post-meta">
@@ -280,7 +286,7 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>Notation:</p>
+        <p>Notation:</p>
 <ol>
 <li>变元分为标量、向量、矩阵三种</li>
 <li>实值函数分为标量、向量、矩阵三种，分别用$f,\textbf{f}, \textbf{F}$ </li>
@@ -377,7 +383,6 @@
 \begin{align*} \mathbb{d}(\pmb{a}^T\pmb{X}\pmb{X}^T\pmb{b})  &= \mathbb{tr}(\pmb{a}^T\mathbb{d}(\pmb{X})\pmb{X}^T\pmb{b})+\mathbb{tr}(\pmb{a}^T\pmb{X}(\mathbb{d}\pmb{X})^T\pmb{b}) \\\\ &= \mathbb{tr}(\pmb{X}^T\pmb{b}\pmb{a}^T\mathbb{d}\pmb{X}) + \mathbb{tr}(\pmb{b}\pmb{a}^T\pmb{X}(\mathbb{d}\pmb{X})^T)\\\\  &= \mathbb{tr}(\pmb{X}^T\pmb{b}\pmb{a}^T\mathbb{d}\pmb{X}) + \mathbb{tr}((\pmb{b}\pmb{a}^T\pmb{X})^T\mathbb{d}\pmb{X})\\\\  &= \mathbb{tr}(\pmb{X}^T\pmb{b}\pmb{a}^T\mathbb{d}\pmb{X}) + \mathbb{tr}(\pmb{X}^T\pmb{a}\pmb{b}^T\mathbb{d}\pmb{X}) \end{align*}</script><script type="math/tex; mode=display">
 \begin{align*} \mathbb{d}(\pmb{a}^T\pmb{X}\pmb{X}^T\pmb{b})  &= \mathbb{tr}(\pmb{X}^T\pmb{b}\pmb{a}^T\mathbb{d}\pmb{X}) + \mathbb{tr}(\pmb{X}^T\pmb{a}\pmb{b}^T\mathbb{d}\pmb{X}) \\\\ &=  \mathbb{tr}((\pmb{X}^T\pmb{b}\pmb{a}^T+\pmb{X}^T\pmb{a}\pmb{b}^T)\mathbb{d}\pmb{X}) \end{align*}</script><script type="math/tex; mode=display">
 \begin{align*}  \frac{\partial( \pmb{a}^T\pmb{X}\pmb{X}^T\pmb{b})}{\partial{\pmb{X}^T}} &=\pmb{X}^T\pmb{b}\pmb{a}^T+\pmb{X}^T\pmb{a}\pmb{b}^T \\\\  \frac{\partial( \pmb{a}^T\pmb{X}\pmb{X}^T\pmb{b})}{\partial{\pmb{X}}} &= \pmb{a}\pmb{b}^T\pmb{X}+\pmb{b}\pmb{a}^T\pmb{X}  \\\\   \end{align*}</script>
-      
     </div>
 
     
@@ -385,322 +390,26 @@
     
 
     <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
+          <div class="post-tags">
+              <a href="/tags/math/" rel="tag"># math</a>
+              <a href="/tags/matrix/" rel="tag"># matrix</a>
+          </div>
 
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/06/28/1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/uploads/avatar.jpg">
-      <meta itemprop="name" content="Alarmist">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Alarmist's Blog">
-      <meta itemprop="description" content="Chillax!">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Alarmist's Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/06/28/1/" class="post-title-link" itemprop="url">On the linear convergence of two decentralized alg</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2022-06-28 15:46:27" itemprop="dateCreated datePublished" datetime="2022-06-28T15:46:27+08:00">2022-06-28</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2022-07-03 10:53:37" itemprop="dateModified" datetime="2022-07-03T10:53:37+08:00">2022-07-03</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/paper-reading/" itemprop="url" rel="index"><span itemprop="name">paper reading</span></a>
-        </span>
-    </span>
-
-  
-    <span class="post-meta-item" title="Symbols count in article">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">Symbols count in article: </span>
-      <span>630</span>
-    </span>
-    <span class="post-meta-item" title="Reading time">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">Reading time &asymp;</span>
-      <span>1 mins.</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="EXTRA-算法"><a href="#EXTRA-算法" class="headerlink" title="EXTRA 算法"></a>EXTRA 算法</h1><h2 id="去中心优化"><a href="#去中心优化" class="headerlink" title="去中心优化"></a>去中心优化</h2><p>解决一个分布式的带约束问题：</p>
-<script type="math/tex; mode=display">
-\underset{x_1,...,x_n}{min}  \sum_{i=1}^{n} f_i(x_i)</script><script type="math/tex; mode=display">
-s.t \quad x_1 = x_2 = ... = x_n</script><p>有很多x,分别存储在各个client.</p>
-<p>框架如下：<br><img src="\uploads\extra1.jpg" alt=""></p>
-<h2 id="EXTRA算法理解"><a href="#EXTRA算法理解" class="headerlink" title="EXTRA算法理解"></a>EXTRA算法理解</h2><p><strong>span概念补充</strong>:向量的张成</p>
-<p>一个向量的张成是一条直线，通过各种数乘和加法都会在这条直线上。</p>
-<p>两个向量的张成是一个平面，三个向量的张成是一个三维空间，如$x=[1\ 0\ 0]^T, y=[0\ 1\ 0]^T, z=[0\ 0\ 1]^T$的张成是$R^3$。</p>
-<p>向量空间$V$中的一组向量$(v_1,v_2,…,v_m)$的所有线性组合组成的集合为其的张成。</p>
-<p><strong>null概念补充</strong>:矩阵的核</p>
-<p>null space零空间，又称核。矩阵的核一般是矩阵的右核，用奇异值分解Singular Value Decomposition（SVD）计算。</p>
-<p><strong>(Right)null space</strong>：<br>The null space of a matrix $A \in \mathbb{R}^{m \times n}$ is the matrix $X = null(A)$ such that</p>
-<script type="math/tex; mode=display">
-AX = 0</script><p>where $X \in \mathbb{R}^{n \times (n-r)}$ and $r= rank(A)$<br><img src="\uploads\nullspace.jpg" alt=""></p>
-<p><strong>spectrum</strong>：谱<br>谱可理解为一种特征表示，像矩阵的谱表示的是其特征值的集合。</p>
-<p><strong>论文tip</strong>：</p>
-<p>Lemma 引理</p>
-<p>Corollary 推论</p>
-<p>Theorem 定理</p>
-<p>Proposition: 命题</p>
-<p>Remark: 备注、注记</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/06/28/First-Post/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/uploads/avatar.jpg">
-      <meta itemprop="name" content="Alarmist">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Alarmist's Blog">
-      <meta itemprop="description" content="Chillax!">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Alarmist's Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/06/28/First-Post/" class="post-title-link" itemprop="url">First Post</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-      
-
-      <time title="Created: 2022-06-28 09:59:46 / Modified: 11:11:47" itemprop="dateCreated datePublished" datetime="2022-06-28T09:59:46+08:00">2022-06-28</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/prose/" itemprop="url" rel="index"><span itemprop="name">prose</span></a>
-        </span>
-    </span>
-
-  
-    <span class="post-meta-item" title="Symbols count in article">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">Symbols count in article: </span>
-      <span>245</span>
-    </span>
-    <span class="post-meta-item" title="Reading time">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">Reading time &asymp;</span>
-      <span>1 mins.</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>I want to do some test.<br>$\sum_{x=0}^{100} x$ </p>
-<p><strong>please do some thing</strong><br>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2022/06/28/First-Post/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
         
-      
-    </div>
 
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/06/28/hello-world/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/uploads/avatar.jpg">
-      <meta itemprop="name" content="Alarmist">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Alarmist's Blog">
-      <meta itemprop="description" content="Chillax!">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Alarmist's Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/06/28/hello-world/" class="post-title-link" itemprop="url">Hello World</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-      
-
-      <time title="Created: 2022-06-28 09:55:32 / Modified: 10:54:08" itemprop="dateCreated datePublished" datetime="2022-06-28T09:55:32+08:00">2022-06-28</time>
-    </span>
-
-  
-    <span class="post-meta-item" title="Symbols count in article">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">Symbols count in article: </span>
-      <span>367</span>
-    </span>
-    <span class="post-meta-item" title="Reading time">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">Reading time &asymp;</span>
-      <span>1 mins.</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2022/06/28/hello-world/#more" rel="contents">
-                Read more &raquo;
-              </a>
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/06/28/1/" rel="prev" title="On the linear convergence of two decentralized alg">
+                  <i class="fa fa-chevron-left"></i> On the linear convergence of two decentralized alg
+                </a>
             </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
+            <div class="post-nav-item">
+            </div>
+          </div>
     </footer>
   </article>
 </div>
+
 
 
 

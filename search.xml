@@ -1,6 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>On the linear convergence of two decentralized alg</title>
+    <url>/2022/06/28/1/</url>
+    <content><![CDATA[<h1 id="EXTRA-算法"><a href="#EXTRA-算法" class="headerlink" title="EXTRA 算法"></a>EXTRA 算法</h1><h2 id="去中心优化"><a href="#去中心优化" class="headerlink" title="去中心优化"></a>去中心优化</h2><p>解决一个分布式的带约束问题：</p>
+<script type="math/tex; mode=display">
+\underset{x_1,...,x_n}{min}  \sum_{i=1}^{n} f_i(x_i)</script><script type="math/tex; mode=display">
+s.t \quad x_1 = x_2 = ... = x_n</script><p>有很多x,分别存储在各个client.</p>
+<p>框架如下：<br><img src="\uploads\extra1.jpg" alt=""></p>
+<h2 id="EXTRA算法理解"><a href="#EXTRA算法理解" class="headerlink" title="EXTRA算法理解"></a>EXTRA算法理解</h2><p><strong>span概念补充</strong>:向量的张成</p>
+<p>一个向量的张成是一条直线，通过各种数乘和加法都会在这条直线上。</p>
+<p>两个向量的张成是一个平面，三个向量的张成是一个三维空间，如$x=[1\ 0\ 0]^T, y=[0\ 1\ 0]^T, z=[0\ 0\ 1]^T$的张成是$R^3$。</p>
+<p>向量空间$V$中的一组向量$(v_1,v_2,…,v_m)$的所有线性组合组成的集合为其的张成。</p>
+<p><strong>null概念补充</strong>:矩阵的核</p>
+<p>null space零空间，又称核。矩阵的核一般是矩阵的右核，用奇异值分解Singular Value Decomposition（SVD）计算。</p>
+<p><strong>(Right)null space</strong>：<br>The null space of a matrix $A \in \mathbb{R}^{m \times n}$ is the matrix $X = null(A)$ such that</p>
+<script type="math/tex; mode=display">
+AX = 0</script><p>where $X \in \mathbb{R}^{n \times (n-r)}$ and $r= rank(A)$<br><img src="\uploads\nullspace.jpg" alt=""></p>
+<p><strong>spectrum</strong>：谱<br>谱可理解为一种特征表示，像矩阵的谱表示的是其特征值的集合。</p>
+<p><strong>论文tip</strong>：</p>
+<p>Lemma 引理</p>
+<p>Corollary 推论</p>
+<p>Theorem 定理</p>
+<p>Proposition: 命题</p>
+<p>Remark: 备注、注记</p>
+]]></content>
+      <categories>
+        <category>paper reading</category>
+      </categories>
+      <tags>
+        <tag>Decentralized</tag>
+        <tag>Linear Convergence</tag>
+        <tag>Decentralized Optimization</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>First Post</title>
     <url>/2022/06/28/First-Post/</url>
     <content><![CDATA[<p>I want to do some test.<br>$\sum_{x=0}^{100} x$ </p>
@@ -13,6 +47,114 @@
       </categories>
       <tags>
         <tag>test</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>矩阵求导</title>
+    <url>/2022/07/03/2/</url>
+    <content><![CDATA[<p>Notation:</p>
+<ol>
+<li>变元分为标量、向量、矩阵三种</li>
+<li>实值函数分为标量、向量、矩阵三种，分别用$f,\textbf{f}, \textbf{F}$ </li>
+</ol>
+<h1 id="本质篇"><a href="#本质篇" class="headerlink" title="本质篇"></a>本质篇</h1><h2 id="矩阵求导结果的布局"><a href="#矩阵求导结果的布局" class="headerlink" title="矩阵求导结果的布局"></a>矩阵求导结果的布局</h2><ol>
+<li>分子布局：分子列向量，分母行向量<script type="math/tex; mode=display">
+\frac{\partial \pmb{f}_{2\times1}(\pmb{x})}{\partial \pmb{x}^T_{3\times1}}=  \begin{bmatrix} \frac{\partial f_1}{\partial x_1} & \frac{\partial f_1}{\partial x_2}&  \frac{\partial f_1}{\partial x_3}\\ \frac{\partial f_2}{\partial x_1}&  \frac{\partial f_2}{\partial x_2}&  \frac{\partial f_2}{\partial x_3}\end{bmatrix}_{2\times 3}</script></li>
+<li>分母布局：分子行向量，分母列向量<script type="math/tex; mode=display">
+\frac{\partial \pmb{f}^T_{2\times1}(\pmb{x})}{\partial \pmb{x}_{3\times1}}=  \begin{bmatrix}\frac{\partial f_1}{\partial x_1}&  \frac{\partial f_2}{\partial x_1}  \\ \frac{\partial f_1}{\partial x_2}&  \frac{\partial f_2}{\partial x_2}  \\ \frac{\partial f_1}{\partial x_3}&  \frac{\partial f_2}{\partial x_3}\end{bmatrix}_{3\times 2}</script></li>
+</ol>
+<h2 id="text-D-pmb-x-f-与-nabla-pmb-x-f"><a href="#text-D-pmb-x-f-与-nabla-pmb-x-f" class="headerlink" title="$\text{D}_{\pmb{x}}f$ 与 $\nabla_{\pmb{x}}f$"></a>$\text{D}_{\pmb{x}}f$ 与 $\nabla_{\pmb{x}}f$</h2><p>两者互为转置</p>
+<script type="math/tex; mode=display">
+\text{D}_{\pmb{x}}f(\pmb{x})= \frac{\partial f(\pmb{x})}{\partial \pmb{x}^T}=  \left[  \frac{\partial f}{\partial x_1},  \frac{\partial f}{\partial x_2},  \cdots, \frac{\partial f}{\partial x_n}  \right]</script><script type="math/tex; mode=display">
+\nabla_{\pmb{x}}f(\pmb{x})= \frac{\partial f(\pmb{x})}{\partial \pmb{x}}=  \left[  \frac{\partial f}{\partial x_1},  \frac{\partial f}{\partial x_2},  \cdots, \frac{\partial f}{\partial x_n}  \right]^T</script><script type="math/tex; mode=display">
+\begin{align*} \nabla_{\pmb{X}}f(\pmb{X})&= \frac{\partial f(\pmb{X})}{\partial \pmb{X}_{m\times n}} \\\\ &= \begin{bmatrix} \frac{\partial f}{\partial x_{11}}&\frac{\partial f}{\partial x_{12}}&\cdots&\frac{\partial f}{\partial x_{1n}} \\ \frac{\partial f}{\partial x_{21}}&\frac{\partial f}{\partial x_{22}}& \cdots & \frac{\partial f}{\partial x_{2n}}\\ \vdots&\vdots&\vdots&\vdots\\ \frac{\partial f} {\partial x_{m1}}&\frac{\partial f}{\partial x_{m2}}&\cdots&\frac{\partial f}{\partial  x_{mn}} \end{bmatrix}_{m\times n} \end{align*}</script><h1 id="基础篇"><a href="#基础篇" class="headerlink" title="基础篇"></a>基础篇</h1><p>只讨论实值标量函数。</p>
+<p>其中向量变元实值标量函数和矩阵变元实值标量函数的四个法则同标量变元的一样。下面给出一些常见的公式：（注：不需要记忆，但方便，后也给出一般推法）</p>
+<h2 id="向量变元的实值标量函数"><a href="#向量变元的实值标量函数" class="headerlink" title="向量变元的实值标量函数"></a>向量变元的实值标量函数</h2><ol>
+<li><script type="math/tex; mode=display">
+\frac{\partial( \pmb{x}^T \pmb{a})}{\partial{\pmb{x}}} =  \frac{\partial( \pmb{a}^T\pmb{x})}{\partial{\pmb{x}}} = \pmb{a}</script></li>
+<li><script type="math/tex; mode=display">
+\frac{\partial( \pmb{x}^T \pmb{x})}{\partial{\pmb{x}}} = 2\pmb{x}</script></li>
+<li><script type="math/tex; mode=display">
+\frac{\partial( \pmb{x}^T \pmb{A}\pmb{x})}{\partial{\pmb{x}}} = \pmb{A}\pmb{x}+\pmb{A}^T \pmb{x}</script></li>
+<li><script type="math/tex; mode=display">
+\frac{\partial( \pmb{a}^T\pmb{x}\pmb{x}^T\pmb{b})}{\partial{\pmb{x}}} = \pmb{a}\pmb{b}^T\pmb{x}+\pmb{b}\pmb{a}^T\pmb{x}</script></li>
+</ol>
+<h2 id="矩阵变元的实值标量函数"><a href="#矩阵变元的实值标量函数" class="headerlink" title="矩阵变元的实值标量函数"></a>矩阵变元的实值标量函数</h2><ol>
+<li><script type="math/tex; mode=display">
+\frac{\partial( \pmb{a}^T\pmb{X}\pmb{b})}{\partial{\pmb{X}}} = \pmb{a}\pmb{b}^T</script></li>
+<li><script type="math/tex; mode=display">
+\frac{\partial( \pmb{a}^T\pmb{X}^T\pmb{b})}{\partial{\pmb{X}}} = \pmb{b}\pmb{a}^T</script></li>
+</ol>
+<p>因为$\pmb{a}$,$\pmb{b}$是常数矩阵，所以两式结果实际一样。</p>
+<ol>
+<li><script type="math/tex; mode=display">
+\frac{\partial( \pmb{a}^T\pmb{X}\pmb{X}^T\pmb{b})}{\partial{\pmb{X}}} = \pmb{a}\pmb{b}^T\pmb{X}+\pmb{b}\pmb{a}^T\pmb{X}</script></li>
+<li><script type="math/tex; mode=display">
+\frac{\partial( \pmb{a}^T\pmb{X}^T\pmb{X}\pmb{b})}{\partial{\pmb{X}}} = \pmb{X}\pmb{b}\pmb{a}^T+\pmb{X}\pmb{a}\pmb{b}^T</script></li>
+</ol>
+<h1 id="进阶篇"><a href="#进阶篇" class="headerlink" title="进阶篇"></a>进阶篇</h1><h2 id="迹的一些性质"><a href="#迹的一些性质" class="headerlink" title="迹的一些性质"></a>迹的一些性质</h2><ol>
+<li><p>线性性质</p>
+<script type="math/tex; mode=display">
+\mathbb{tr}(c_1\pmb{A}+c_2\pmb{B}) = c_1\mathbb{tr}(\pmb{A})+c_2\mathbb{tr}(\pmb{B})</script></li>
+<li><p>转置</p>
+<script type="math/tex; mode=display">
+\mathbb{tr}(\pmb{A})=\mathbb{tr}(\pmb{A}^T)</script></li>
+<li><p>乘积的迹的本质<br>一个矩阵乘以另一个矩阵的转置的迹，本质是$\pmb{A}_{m\times n},\pmb{B}_{m\times n}$两个矩阵<strong>对应位置的元素相乘并相加</strong>，可以理解为<strong>向量的点积</strong>在矩阵上的推广，即</p>
+<script type="math/tex; mode=display">
+\begin{align*} \mathbb{tr}(\pmb{A}\pmb{B}^T)  &= a_{11}b_{11}+a_{12}b_{12}+\cdots+a_{1n}b_{1n}\\ &+ a_{21}b_{21}+a_{22}b_{22}+\cdots+a_{2n}b_{2n}\\ &+ \cdots \\ &+ a_{m1}b_{m1}+a_{m2}b_{m2}+\cdots+a_{mn}b_{mn} \end{align*}</script></li>
+</ol>
+<script type="math/tex; mode=display">
+\begin{align*} \mathbb{tr}(\pmb{A}\pmb{B}^T) &=\mathbb{tr}( \begin{bmatrix} a_{11} & a_{12} & \cdots & a_{1n} \\ a_{21} & a_{22} & \cdots & a_{2n} \\ \vdots & \vdots & \vdots & \vdots \\ a_{m1} & a_{m2} & \cdots & a_{mn} \\ \end{bmatrix} \begin{bmatrix} b_{11} & b_{21} & \cdots & b_{m1} \\ b_{12} & b_{22} & \cdots & b_{m2} \\ \vdots & \vdots & \vdots & \vdots \\ b_{1n} & b_{2n} & \cdots & b_{mn} \\ \end{bmatrix} )   \\\\   &= \mathbb{tr} \begin{bmatrix} a_{11}b_{11}+a_{12}b_{12}+\cdots+a_{1n}b_{1n} & 不用管 & \cdots & 不用管 \\ 不用管 & a_{21}b_{21}+a_{22}b_{22}+\cdots+a_{2n}b_{2n} & \cdots & 不用管 \\ \vdots & \vdots & \ddots & \vdots \\ 不用管 & 不用管 & \cdots & a_{m1}b_{m1}+a_{m2}b_{m2}+\cdots+a_{mn}b_{mn} \\ \end{bmatrix}_{m \times m} \\\\ &= a_{11}b_{11}+a_{12}b_{12}+\cdots+a_{1n}b_{1n}\\ &+ a_{21}b_{21}+a_{22}b_{22}+\cdots+a_{2n}b_{2n}\\ &+ \cdots \\ &+ a_{m1}b_{m1}+a_{m2}b_{m2}+\cdots+a_{mn}b_{mn} \end{align*}</script><ol>
+<li><strong>交换律</strong><script type="math/tex; mode=display">
+\mathbb{tr}(\pmb{A}\pmb{B})= \mathbb{tr}(\pmb{B}\pmb{A})</script>其中，$\pmb{A}_{m \times n},\pmb{B}_{n \times m}$。</li>
+</ol>
+<p>拓广：</p>
+<script type="math/tex; mode=display">
+\mathbb{tr}(\pmb{A}\pmb{B}\pmb{C})=\mathbb{tr}(\pmb{C}\pmb{A}\pmb{B})=\mathbb{tr}(\pmb{B}\pmb{C}\pmb{A})</script><h2 id="矩阵微分的一些性质"><a href="#矩阵微分的一些性质" class="headerlink" title="矩阵微分的一些性质"></a>矩阵微分的一些性质</h2><ol>
+<li>乘积法则<script type="math/tex; mode=display">
+\mathbb{d}(\pmb{F}(\pmb{X})\pmb{G}(\pmb{X}))=\mathbb{d}(\pmb{F}(\pmb{X}))\pmb{G}(\pmb{X}) + \pmb{F}(\pmb{X})\mathbb{d}\pmb{G}(\pmb{X})</script></li>
+</ol>
+<p>其中，$\pmb{F}_{p \times q}(\pmb{X}),\pmb{G}_{q \times s}(\pmb{X})$。</p>
+<p><strong>注意</strong>:此时的微分是<strong>矩阵</strong>，<strong>不能</strong>交换乘积的左右顺序。</p>
+<p>拓广：</p>
+<p>更多个<strong>乘积</strong>的法则：</p>
+<script type="math/tex; mode=display">
+\mathbb{d}(\pmb{F}(\pmb{X})\pmb{G}(\pmb{X})\pmb{H}(\pmb{X}))=\mathbb{d}(\pmb{F}(\pmb{X}))\pmb{G}(\pmb{X})\pmb{H}(\pmb{X}) + \pmb{F}(\pmb{X})\mathbb{d}(\pmb{G}(\pmb{X}))\pmb{H}(\pmb{X})+ \pmb{F}(\pmb{X})\pmb{G}(\pmb{X})\mathbb{d}\pmb{H}(\pmb{X})</script><ol>
+<li>转置法则</li>
+</ol>
+<script type="math/tex; mode=display">
+ \mathbb{d}\pmb{F}^T_{p \times q}(\pmb{X})= (\mathbb{d}\pmb{F}_{p \times q}(\pmb{X}))^T</script><h2 id="矩阵求导常用推导式"><a href="#矩阵求导常用推导式" class="headerlink" title="矩阵求导常用推导式"></a>矩阵求导<strong>常用推导式</strong></h2><p>需要转化为这个形式进行求解。其中$\frac{\partial f(\pmb{X})}{\partial\pmb{X}^T}$即为所求，如果需要梯度形式只要进行转置即可。</p>
+<script type="math/tex; mode=display">
+\begin{align*} \mathbb{d}f(\pmb{X}) &=\mathbb{tr}(\frac{\partial f(\pmb{X})}{\partial\pmb{X}^T} \mathbb{d}\pmb{X})\end{align*}</script><p>下面给出几个常用的公式：</p>
+<h3 id="夹层饼"><a href="#夹层饼" class="headerlink" title="夹层饼"></a>夹层饼</h3><script type="math/tex; mode=display">
+\mathbb{d}(\pmb{A}\pmb{X}\pmb{B})=\pmb{A}\mathbb{d}(\pmb{X})\pmb{B}</script><h3 id="行列式"><a href="#行列式" class="headerlink" title="行列式"></a>行列式</h3><script type="math/tex; mode=display">
+ \mathbb{d}|\pmb{X}|= |\pmb{X}|\mathbb{tr}(\pmb{X}^{-1}\mathbb{d}\pmb{X}) = \mathbb{tr}(|\pmb{X}|\pmb{X}^{-1}\mathbb{d}\pmb{X})</script><p>其中，$\pmb{X}_{n \times n}$。</p>
+<p>补：</p>
+<p>伴随矩阵$\pmb{X}^<em>$。其值$\pmb{X}^{-1}=\frac{\pmb{X}^</em>}{|\pmb{X}|} $。</p>
+<p>行列式按行展开：</p>
+<script type="math/tex; mode=display">
+|\pmb{X}|=x_{i1}A_{i1}+x_{i2}A_{i2}+\cdots+x_{in}A_{in}</script><script type="math/tex; mode=display">
+\begin{align*} \frac{\partial |\pmb{X}|}{\partial \pmb{X}^T} &=  \begin{bmatrix} A_{11} & A_{21} & \cdots & A_{n1} \\ A_{12} & A_{22} & \cdots & A_{n2} \\ \vdots & \vdots & \ddots & \vdots \\ A_{1n} & A_{2n} & \cdots & A_{nn} \\ \end{bmatrix}  =\pmb{X}^* \end{align*}</script><p>即矩阵行列式对本身转置求导为伴随矩阵。</p>
+<h3 id="逆矩阵"><a href="#逆矩阵" class="headerlink" title="逆矩阵"></a>逆矩阵</h3><script type="math/tex; mode=display">
+\mathbb{d}(\pmb{X}^{-1})=-\pmb{X}^{-1}\mathbb{d}(\pmb{X})\pmb{X}^{-1}</script><h3 id="迹和微分号的交换"><a href="#迹和微分号的交换" class="headerlink" title="迹和微分号的交换"></a>迹和微分号的交换</h3><p>对于实值标量函数$f(\pmb{X})$，有$\mathbb{tr}(f(\pmb{X})) =f(\pmb{X})$，有$\mathbb{d}f(\pmb{X})=\mathbb{tr}(\mathbb{d}f(\pmb{X}))$。</p>
+<p><strong>所以有：</strong></p>
+<script type="math/tex; mode=display">
+\mathbb{d}f(\pmb{X}) = \mathbb{d}(\mathbb{tr}f(\pmb{X}))=\mathbb{tr}(\mathbb{d}f(\pmb{X}))</script><h3 id="例子（看完就懂"><a href="#例子（看完就懂" class="headerlink" title="例子（看完就懂"></a>例子（看完就懂</h3><script type="math/tex; mode=display">
+\frac{\partial( \pmb{a}^T\pmb{X}\pmb{X}^T\pmb{b})}{\partial{\pmb{X}}} = \pmb{a}\pmb{b}^T\pmb{X}+\pmb{b}\pmb{a}^T\pmb{X}</script><p>解：</p>
+<script type="math/tex; mode=display">
+\mathbb{d}(\pmb{a}^T\pmb{X}\pmb{X}^T\pmb{b})= \mathbb{tr}(\mathbb{d}(\pmb{a}^T\pmb{X}\pmb{X}^T\pmb{b}))</script><script type="math/tex; mode=display">
+\begin{align*} \mathbb{d}(\pmb{a}^T\pmb{X}\pmb{X}^T\pmb{b}) &= \mathbb{tr}(\mathbb{d}(\pmb{a}^T\pmb{X}\pmb{X}^T\pmb{b})) \\\\ &= \mathbb{tr}(\pmb{a}^T\mathbb{d}(\pmb{X}\pmb{X}^T)\pmb{b})  \end{align*}</script><script type="math/tex; mode=display">
+\begin{align*} \mathbb{d}(\pmb{a}^T\pmb{X}\pmb{X}^T\pmb{b})  &= \mathbb{tr}(\pmb{a}^T\mathbb{d}(\pmb{X}\pmb{X}^T)\pmb{b}) \\\\ &=  \mathbb{tr}[\pmb{a}^T(\mathbb{d}(\pmb{X})\pmb{X}^T+\pmb{X}\mathbb{d}\pmb{X}^T)\pmb{b}] \end{align*}</script><script type="math/tex; mode=display">
+\begin{align*} \mathbb{d}(\pmb{a}^T\pmb{X}\pmb{X}^T\pmb{b})  &= \mathbb{tr}(\pmb{a}^T\mathbb{d}(\pmb{X})\pmb{X}^T\pmb{b})+\mathbb{tr}(\pmb{a}^T\pmb{X}\mathbb{d}(\pmb{X}^T)\pmb{b}) \\\\ &= \mathbb{tr}(\pmb{a}^T\mathbb{d}(\pmb{X})\pmb{X}^T\pmb{b})+\mathbb{tr}(\pmb{a}^T\pmb{X}(\mathbb{d}\pmb{X})^T\pmb{b})  \end{align*}</script><script type="math/tex; mode=display">
+\begin{align*} \mathbb{d}(\pmb{a}^T\pmb{X}\pmb{X}^T\pmb{b})  &= \mathbb{tr}(\pmb{a}^T\mathbb{d}(\pmb{X})\pmb{X}^T\pmb{b})+\mathbb{tr}(\pmb{a}^T\pmb{X}(\mathbb{d}\pmb{X})^T\pmb{b}) \\\\ &= \mathbb{tr}(\pmb{X}^T\pmb{b}\pmb{a}^T\mathbb{d}\pmb{X}) + \mathbb{tr}(\pmb{b}\pmb{a}^T\pmb{X}(\mathbb{d}\pmb{X})^T)\\\\  &= \mathbb{tr}(\pmb{X}^T\pmb{b}\pmb{a}^T\mathbb{d}\pmb{X}) + \mathbb{tr}((\pmb{b}\pmb{a}^T\pmb{X})^T\mathbb{d}\pmb{X})\\\\  &= \mathbb{tr}(\pmb{X}^T\pmb{b}\pmb{a}^T\mathbb{d}\pmb{X}) + \mathbb{tr}(\pmb{X}^T\pmb{a}\pmb{b}^T\mathbb{d}\pmb{X}) \end{align*}</script><script type="math/tex; mode=display">
+\begin{align*} \mathbb{d}(\pmb{a}^T\pmb{X}\pmb{X}^T\pmb{b})  &= \mathbb{tr}(\pmb{X}^T\pmb{b}\pmb{a}^T\mathbb{d}\pmb{X}) + \mathbb{tr}(\pmb{X}^T\pmb{a}\pmb{b}^T\mathbb{d}\pmb{X}) \\\\ &=  \mathbb{tr}((\pmb{X}^T\pmb{b}\pmb{a}^T+\pmb{X}^T\pmb{a}\pmb{b}^T)\mathbb{d}\pmb{X}) \end{align*}</script><script type="math/tex; mode=display">
+\begin{align*}  \frac{\partial( \pmb{a}^T\pmb{X}\pmb{X}^T\pmb{b})}{\partial{\pmb{X}^T}} &=\pmb{X}^T\pmb{b}\pmb{a}^T+\pmb{X}^T\pmb{a}\pmb{b}^T \\\\  \frac{\partial( \pmb{a}^T\pmb{X}\pmb{X}^T\pmb{b})}{\partial{\pmb{X}}} &= \pmb{a}\pmb{b}^T\pmb{X}+\pmb{b}\pmb{a}^T\pmb{X}  \\\\   \end{align*}</script>]]></content>
+      <categories>
+        <category>math</category>
+      </categories>
+      <tags>
+        <tag>math</tag>
+        <tag>matrix</tag>
       </tags>
   </entry>
   <entry>
